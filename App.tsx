@@ -5,6 +5,7 @@ export function App() {
  return(
     <View>
       <Text>Teste</Text>
+      <Text>Teste</Text>
     </View>
   );
 }
