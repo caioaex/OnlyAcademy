@@ -10,6 +10,7 @@ export const Header = styled.View`
 `;
 
 export const ImageBackground = styled.Image`
+  width: 100%;
   position: absolute;
   z-index: 0;
   overflow: hidden;
@@ -49,3 +50,9 @@ export const ProfileBody = styled.View`
   border-top-right-radius: 50px;
 `;
 
+export const ProfileCard = styled.View`
+  width: Hug (291px)px;
+  height: Hug (243px)px;
+  top: 201px;
+  left: 50px;
+`

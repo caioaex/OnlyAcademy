@@ -12,7 +12,6 @@ export const Container = styled.TouchableOpacity<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
 export const IconContainer = styled(Icon)<ButtonProps>`
