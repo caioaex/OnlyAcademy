@@ -1,9 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { Profile } from './src/pages/profile';
+import { SafeAreaView, Text, View } from 'react-native';
+import { Profile } from './src/pages/Profile';
+import { Camera } from './src/components/Camera';
 
 export function App() {
  return(
-    <Profile />
+  <SafeAreaView>
+    <Camera />
+  </SafeAreaView>
   );
 }

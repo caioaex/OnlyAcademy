@@ -1682,6 +1682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/cameraroll@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "@react-native-community/cameraroll@npm:4.1.2"
+  peerDependencies:
+    react: 16 || 17
+    react-native: ">=0.60"
+  checksum: 2eb79f5538f50c66ed79f16e16ac02178ed3b64686c2a6d6218666999ef2f6349f40f0f7069e00e4b9236791b0a9f2b9badcfd1062e6605ad7f0fb27e6c2604a
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:13.6.6":
   version: 13.6.6
   resolution: "@react-native-community/cli-clean@npm:13.6.6"
@@ -2661,6 +2671,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
+    "@react-native-community/cameraroll": ^4.1.2
     "@react-native-community/eslint-config": ^2.0.0
     "@react-native/metro-config": ^0.74.83
     "@tsconfig/react-native": ^2.0.2
@@ -2680,7 +2691,9 @@ __metadata:
     metro-react-native-babel-preset: ^0.70.3
     react: 18.2.0
     react-native: 0.74.1
+    react-native-camera: ^4.2.1
     react-native-vector-icons: ^10.1.0
+    react-native-vision-camera: ^4.0.3
     react-test-renderer: 18.0.0
     styled-components: ^6.1.11
     ts-jest: ^28.0.7
@@ -8921,7 +8934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -9010,6 +9023,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-camera@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "react-native-camera@npm:4.2.1"
+  dependencies:
+    prop-types: ^15.6.2
+  checksum: 0e84ce657774694d1cc49395c43a8f2caabc03df36aa77aacfb5c797ad8cfe0368f4807deccc54e82ff2b193e8c2d1ce7ad504eedf7a9fc4719b38e39958a804
+  languageName: node
+  linkType: hard
+
 "react-native-vector-icons@npm:^10.1.0":
   version: 10.1.0
   resolution: "react-native-vector-icons@npm:10.1.0"
@@ -9022,6 +9044,26 @@ __metadata:
     fa6-upgrade: bin/fa6-upgrade.sh
     generate-icon: bin/generate-icon.js
   checksum: c1e1d7c7ccc110e99caaed4d57324d5331dfa91817183350d2fd4df16d2302e7363da1f7a2b87011da3936b77aac3a7bf8ee11844dd8786b8b7dbc6553494866
+  languageName: node
+  linkType: hard
+
+"react-native-vision-camera@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-native-vision-camera@npm:4.0.3"
+  peerDependencies:
+    "@shopify/react-native-skia": "*"
+    react: "*"
+    react-native: "*"
+    react-native-reanimated: "*"
+    react-native-worklets-core: "*"
+  peerDependenciesMeta:
+    "@shopify/react-native-skia":
+      optional: true
+    react-native-reanimated:
+      optional: true
+    react-native-worklets-core:
+      optional: true
+  checksum: 774b9fbc841a4f8c4df349b3b2a0ee309c3a43ce97ad1f54965fceac5b1187db36f34bb1cf3744e563dc006da9dae8e96f12b9297a2df883a57444236b73fbd2
   languageName: node
   linkType: hard
 
