@@ -1,26 +1,22 @@
 import React, { useRef } from "react"
-import { Container, CameraScreen } from "./style"
+import { Container } from "./style"
 import { RNCamera } from "react-native-camera"
+import { Button } from "react-native"
 
 export function Camera(){
   const cameraRef = useRef<RNCamera>
 
-  function takePicture(){}
+  function takePicture(){
+
+  }
 
   return(
-    <Container>
-      <CameraScreen
+    <Container style={{flex: 1}}>
+      <RNCamera
         style={{flex: 1}} 
         ref={ref => cameraRef}
         captureAudio={false}  
-        type={RNCamera.Constants.Type.back}  
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        onPictureTaken={takePicture} />
+        type={RNCamera.Constants.Type.back} />
     </Container>
   )
 }

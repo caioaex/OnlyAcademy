@@ -5,8 +5,6 @@ import { Camera } from './src/components/Camera';
 
 export function App() {
  return(
-  <SafeAreaView>
     <Camera />
-  </SafeAreaView>
   );
 }
