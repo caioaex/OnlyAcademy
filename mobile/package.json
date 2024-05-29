@@ -1,5 +1,5 @@
 {
-  "name": "onlyacademy",
+  "name": "mobile",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
@@ -9,11 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~51.0.8",
+    "expo": "~51.0.9",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.74.1",
-    "styled-components": "^6.1.11"
+    "react-native": "0.74.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
