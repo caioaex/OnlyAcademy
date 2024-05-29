@@ -1,6 +1,7 @@
 import React from "react"
 import { Body, Header, ImageBackground, ViewImage, MiddleImage, ProfileBody, ProfileCard } from "./style"
 import { IconButton } from "../../components/ButtonIcon"
+import Routes from "../../routes"
 
 const backgroundImage = require("../../assets/imageBackground.png")
 
