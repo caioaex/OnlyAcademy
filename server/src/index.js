@@ -1,5 +1,5 @@
 const express = require('express');
-const stripe = require('stripe')('sk_test_51PNlNP08gspZg6mjbhTlpd662PauJDgpPRSOLfZvmt5hJ4xWWpovrhe9Z54xt7eTHAPVaH89qbaCTD9aFgVr9E4A006gfzL7of')
+const stripe = require('stripe')('')
 const app = express()
 app.use(express.static('public'));
 app.use(express.json())
