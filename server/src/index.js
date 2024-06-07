@@ -13,6 +13,8 @@ const DOMAIN = 'http://localhost:4000';
 
 app.post('/pay/:assinatura', async (req, res) => {
     try {
+        const customer = "cus_QEZRbjITLvjtgR"
+
         const price = req.params.assinatura === "mensal"
             ? 'price_1POVQB08gspZg6mjIdZSYg7Z'
             : req.params.assinatura === "anual"
@@ -23,31 +25,21 @@ app.post('/pay/:assinatura', async (req, res) => {
             return res.status(400).json({ error: 'Assinatura inválida.' });
         }
 
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    price: price,
-                    quantity: 1
-                }
-            ],
-            mode: 'subscription',
-            success_url: `${DOMAIN}?success=true`,
-            cancel_url: `${DOMAIN}?canceled=true`,
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: price.map(amount => amount),
+            currency: 'brl',
+            customer: customer
         })
 
-        if (res.statusCode === 200) return res.redirect(200, session.url)
+        if(res.statusCode !== 200) return res.json()
+
+        if (res.statusCode === 200) return res.json({
+            paymentIntent: paymentIntent,
+            publishableKey: process.env.PUBLISHABLE_KEY
+        })
     } catch (e) {
         return res.json(e)
     }
-})
-
-app.post('/payment-sheet', async (req, res) => {
-    const customer = await stripe.customers.create()
-    const ephemeralKey = await stripe.ephemeralKeys.create(
-        {customer: customer.id},
-        {apiVersion: '2024-04-10'}
-    )
-
 })
 
 app.listen(4000, () => {
