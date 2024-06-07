@@ -41,6 +41,15 @@ app.post('/pay/:assinatura', async (req, res) => {
     }
 })
 
+app.post('/payment-sheet', async (req, res) => {
+    const customer = await stripe.customers.create()
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+        {customer: customer.id},
+        {apiVersion: '2024-04-10'}
+    )
+
+})
+
 app.listen(4000, () => {
     console.log('Server rodando na porta 4000!')
 })
