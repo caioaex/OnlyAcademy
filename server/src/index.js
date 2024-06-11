@@ -11,35 +11,50 @@ app.use(cors())
 
 const DOMAIN = 'http://localhost:4000';
 
-app.post('/pay/:assinatura', async (req, res) => {
-    try {
-        const customer = "cus_QEZRbjITLvjtgR"
+app.get('/precos', async () => {
 
-        const price = req.params.assinatura === "mensal"
-            ? 'price_1POVQB08gspZg6mjIdZSYg7Z'
-            : req.params.assinatura === "anual"
-                ? 'price_1POVT908gspZg6mjIMgjKx12'
-                : null;
+})
 
-        if (!price) {
-            return res.status(400).json({ error: 'Assinatura inválida.' });
-        }
+app.post("/create-payment-month", async (req, res) => {
+    await stripe.paymentIntents.create({
+        amount: 2500,
+        currency: 'BRL'
+    })
 
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: price.map(amount => amount),
-            currency: 'brl',
-            customer: customer
-        })
+    if(res.statusCode === 400) return res.json("Nao foi possivel criar o pagamento!")
 
-        if(res.statusCode !== 200) return res.json()
+    if(res.statusCode === 200) return res.json("Pagamento criado!")
+})
 
-        if (res.statusCode === 200) return res.json({
-            paymentIntent: paymentIntent,
-            publishableKey: process.env.PUBLISHABLE_KEY
-        })
-    } catch (e) {
-        return res.json(e)
-    }
+app.post("/create-payment-year", async (req, res) => {
+    await stripe.paymentIntents.create({
+        amount: 15000,
+        currency: 'BRL'
+    })
+
+    if(res.statusCode === 400) return res.json("Nao foi possivel criar o pagamento!")
+
+    if(res.statusCode === 200) return res.json("Pagamento criado!")
+})
+
+app.post("/pay/:id", async (req, res) => {
+    const { id } = req.params;
+    const { paymentMethod } = req.body;
+
+    await stripe.paymentIntents.confirm(id, {
+        payment_method: paymentMethod,
+        return_url: 'http://www.teste.com'
+    })
+
+    if(res.statusCode != 200) return res.json()
+
+    res.json()
+})
+
+app.get("/payment/all", async (req,res) => {
+    const pagamentos = await stripe.paymentIntents.list()
+
+    if(res.statusCode === 200) return res.json(pagamentos)
 })
 
 app.listen(4000, () => {
