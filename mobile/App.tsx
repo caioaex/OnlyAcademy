@@ -1,10 +1,9 @@
 import React from 'react';
-import { Profile }  from './src/pages/Profile';
-import { Camera } from './src/components/Camera';
-import { ChoicePlan } from './src/pages/PlanChoices';
+import 'react-native-gesture-handler';
+import Routes from './src/routes';
 
 export default function App() {
  return(
-    <ChoicePlan />
+    <Routes />
   );
 }
