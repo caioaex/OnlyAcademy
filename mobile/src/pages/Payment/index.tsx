@@ -23,10 +23,10 @@ export function Payment({ route, navigation }) {
             setClientSecret(data.clientSecret)
           } catch (error) {
             console.log(`Erro: ${error}`)
-          }
-
-          await fetchPaymentIntentClientSecret()
+          }  
         }
+        
+        fetchPaymentIntentClientSecret()
 
       }, [plan])
 
