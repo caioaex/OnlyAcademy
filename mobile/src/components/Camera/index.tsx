@@ -8,14 +8,7 @@ import * as FileSystem from 'expo-file-system';
 
 export function Camera_({ navigation }) {
   let camera: Camera
-
-  const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [image, setImage] = useState()
-
-  function toggleCamera() {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
-  }
 
   if (!permission) {
     return <View />;
@@ -60,26 +53,10 @@ export function Camera_({ navigation }) {
         style={{ flex: 1 }}
         ref={r => { camera = r }}
       >
-        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }}>
+        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 20 }}>
           <ButtonIcon onPress={() => takePicture()} icon={{ name: 'camera', size: 24, color: 'black' }} />
         </View>
       </Camera>
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    margin: 20,
-    alignItems: 'flex-end'
-  },
-  button: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    padding: 5,
-    marginBottom: 20
-  }
-});
