@@ -11,7 +11,7 @@ export function Payment({ route, navigation }) {
     useEffect(() => {
         const fetchPaymentIntentClientSecret = async () => {
           try {
-            const response = await fetch(`http://10.47.7.76r:4000/create-payment-${plan}`, {
+            const response = await fetch(`http://26.30.203.168:4000/create-payment-${plan}`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
             })

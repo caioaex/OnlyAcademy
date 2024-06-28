@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { View, TextInput, Text, Alert } from "react-native"
+import { View, TextInput, Text, Alert, TouchableWithoutFeedback, Keyboard } from "react-native"
 import { supabase } from "../../config/supaBase"
 import { Button } from "../../components/Button"
+import { Container, Input } from "./style"
 
-export function Login() {
+export function Login({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -13,30 +14,34 @@ export function Login() {
 			password: password
 		})
 
-		console.log(data)
-
-		if (error) {
+		if (error && error.message == "Invalid login credentials") {
+			Alert.alert(`Usuário inexistente!`)
+		} else if (error) {
 			Alert.alert(`${error}`)
 		} else {
-			Alert.alert('Login realizado com sucesso!')
+			console.log('Login realizado com sucesso!')
+			navigation.navigate("Home")
 		}
 	}
 
 	return (
-		<View>
-			<TextInput
-				placeholder="Digite seu e-mail"
-				value={email}
-				onChangeText={setEmail}
-				autoCapitalize="none"
-			/>
-			<TextInput
-				placeholder="Digite sua senha"
-				value={password}
-				onChangeText={setPassword}
-				autoCapitalize="none"
-			/>
-			<Button title="Entrar" onPress={handleLogin} />
-		</View>
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+			<Container>
+				<Input
+					placeholder="Digite seu e-mail"
+					value={email}
+					onChangeText={setEmail}
+					autoCapitalize="none"
+				/>
+				<Input
+					placeholder="Digite sua senha"
+					value={password}
+					onChangeText={setPassword}
+					autoCapitalize="none"
+					secureTextEntry={true}
+				/>
+				<Button title="Entrar" onPress={handleLogin} backgroundColor="red" />
+			</Container >
+		</TouchableWithoutFeedback>
 	)
 }

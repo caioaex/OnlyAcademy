@@ -11,7 +11,7 @@ export interface ButtonProps {
   onPress?: () => {}
 }
 
-export function IconButton({ backgroundColor, icon, onPress } : ButtonProps) {
+export function ButtonIcon({ backgroundColor, icon, onPress } : ButtonProps) {
   return(
     <Container backgroundColor={backgroundColor} onPress={onPress}>
       <IconContainer 
