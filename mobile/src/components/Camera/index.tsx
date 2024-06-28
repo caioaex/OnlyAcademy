@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react"
 import { Container } from "./style"
-import { CameraView, CameraPictureOptions, useCameraPermissions, CameraType } from 'expo-camera';
+import { Camera, CameraType, ImageType } from 'expo-camera/legacy';
 import { Button, View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { ButtonIcon } from "../ButtonIcon";
+import { supabase } from "../../config/supaBase";
+import * as FileSystem from 'expo-file-system';
 
-export function Camera() {
-  let camera: CameraView
+export function Camera_() {
+  let camera: Camera
+  
   const [facing, setFacing] = useState('back');
-  const [permission, requestPermission] = useCameraPermissions();
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [image, setImage] = useState()
 
   function toggleCamera() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
@@ -27,22 +31,41 @@ export function Camera() {
   }
 
   async function takePicture() {
-    console.log('teste')
-    const data = await camera.takePictureAsync()
-    console.log(data)
+    const photo = await camera.takePictureAsync({ quality: 1, base64: true, exif: false })
+    const fileName = photo.uri.split('/').pop();
+
+    const fileInfo = await FileSystem.getInfoAsync(photo.uri)
+
+    if (fileInfo.exists) {
+      const fileBase64 = await FileSystem.readAsStringAsync(photo.uri, { encoding: FileSystem.EncodingType.Base64 });
+      const mimeType = 'image/jpeg';
+    const { data, error } = await supabase
+      .storage
+      .from('images')
+      .upload(`images/${fileName}`, fileBase64, {
+        cacheControl: "36000",
+        upsert: false,
+        contentType: mimeType
+      });
+
+      if(error) {
+        console.error('Deu erro!', error)
+      } else {
+        console.log("Deu certo! ", data)
+      }
+    }
   }
 
   return (
     <Container style={{ flex: 1 }}>
-      <CameraView
+      <Camera
         style={{ flex: 1 }}
-        facing={facing}
+        ref={r => { camera = r }}
       >
         <View style={{ flexDirection: "row" }}>
-          <ButtonIcon onPress={() => takePicture} icon={{ name: 'camera', size: 24, color: 'black' }} />
-          <ButtonIcon onPress={() => toggleCamera} icon={{ name: 'instagram', size: 24, color: 'black' }} />
+          <ButtonIcon onPress={() => takePicture()} icon={{ name: 'camera', size: 24, color: 'black' }} />
         </View>
-      </CameraView>
+      </Camera>
     </Container>
   )
 }

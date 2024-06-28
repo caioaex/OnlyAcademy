@@ -3,13 +3,15 @@ import { View, TextInput, Text, Alert, TouchableWithoutFeedback, Keyboard } from
 import { supabase } from "../../config/supaBase"
 import { Button } from "../../components/Button"
 import { Container, Input } from "./style"
+import { useAuth } from "../../config/AuthProvider"
 
 export function Login({ navigation }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const { setSession } = useAuth();
 
 	async function handleLogin() {
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const { data: { session }, error } = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password
 		})
@@ -20,6 +22,7 @@ export function Login({ navigation }) {
 			Alert.alert(`${error}`)
 		} else {
 			console.log('Login realizado com sucesso!')
+			setSession(session);
 			navigation.navigate("Home")
 		}
 	}

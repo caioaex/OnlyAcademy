@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from "react"
 import { Button, Text, View } from "react-native"
 import { supabase } from "../../config/supaBase"
-import { Camera } from "../../components/Camera"
+import { Camera_ } from "../../components/Camera"
 
 export function Home({ navigation }){
   const [posts, setPosts] = useState()

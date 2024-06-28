@@ -5,7 +5,7 @@ import { Profile } from '../pages/Profile';
 import { ChoicePlan } from "../pages/PlanChoices";
 import { Payment } from "../pages/Payment";
 import { Login } from "../pages/Login";
-import { Camera } from "../components/Camera";
+import { Camera_ } from "../components/Camera";
 
 const Stack = createStackNavigator();
 
@@ -18,7 +18,7 @@ export default function Routes() {
         <Stack.Screen name="Payment" component={ Payment } />
         <Stack.Screen name="Home" component={ Home } />
         <Stack.Screen name="Profile" component={ Profile } />
-        <Stack.Screen name="Camera" component={ Camera } />
+        <Stack.Screen name="Camera" component={ Camera_ } />
       </Stack.Navigator>
     </NavigationContainer>
   )
