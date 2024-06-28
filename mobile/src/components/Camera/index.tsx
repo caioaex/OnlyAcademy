@@ -6,9 +6,9 @@ import { ButtonIcon } from "../ButtonIcon";
 import { supabase } from "../../config/supaBase";
 import * as FileSystem from 'expo-file-system';
 
-export function Camera_() {
+export function Camera_({ navigation }) {
   let camera: Camera
-  
+
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [image, setImage] = useState()
@@ -34,25 +34,23 @@ export function Camera_() {
     const photo = await camera.takePictureAsync({ quality: 1, base64: true, exif: false })
     const fileName = photo.uri.split('/').pop();
 
-    const fileInfo = await FileSystem.getInfoAsync(photo.uri)
+    const arraybuffer = await fetch(photo.uri).then((res) => res.arrayBuffer())
 
-    if (fileInfo.exists) {
-      const fileBase64 = await FileSystem.readAsStringAsync(photo.uri, { encoding: FileSystem.EncodingType.Base64 });
-      const mimeType = 'image/jpeg';
+    const mimeType = 'image/png';
     const { data, error } = await supabase
       .storage
       .from('images')
-      .upload(`images/${fileName}`, fileBase64, {
+      .upload(`images/${fileName}`, arraybuffer, {
         cacheControl: "36000",
         upsert: false,
         contentType: mimeType
       });
 
-      if(error) {
-        console.error('Deu erro!', error)
-      } else {
-        console.log("Deu certo! ", data)
-      }
+    if (error) {
+      console.error('Deu erro!', error)
+    } else {
+      console.log("Deu certo! ", data)
+      navigation.navigate("Home")
     }
   }
 
