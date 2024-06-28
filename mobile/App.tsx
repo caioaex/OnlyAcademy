@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import Routes from './src/routes';
 import { AuthProvider } from './src/config/AuthProvider';
+import  Routes from './src/routes';
 
 export default function App() {
   return (

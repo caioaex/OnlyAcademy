@@ -11,7 +11,7 @@ export function Home({ navigation }){
       try {
         const {data, error} = await supabase.from('posts').select()
         if(error) console.log(new Error(`${JSON.stringify(error)}`))
-        if(!error) console.log(`Profile: ${JSON.stringify(data)}`)
+        if(!error) console.log(`Posts: ${JSON.stringify(data)}`)
       } catch(e) {
         console.log(e)
       } 
@@ -22,8 +22,7 @@ export function Home({ navigation }){
 
   return(
     <View>
-      <Text>Teste home</Text>
-      <Button title="Camera" onPress={() => {navigation.navigate("Camera")}}></Button>
+      <Button title="Acessar Camera" onPress={() => {navigation.navigate("Camera")}}></Button>
     </View>
   )
 }

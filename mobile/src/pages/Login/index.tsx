@@ -43,7 +43,7 @@ export function Login({ navigation }) {
 					autoCapitalize="none"
 					secureTextEntry={true}
 				/>
-				<Button title="Entrar" onPress={handleLogin} backgroundColor="red" />
+				<Button title="Entrar" onPress={handleLogin} backgroundColor="white" />
 			</Container >
 		</TouchableWithoutFeedback>
 	)

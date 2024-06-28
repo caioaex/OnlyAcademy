@@ -32,7 +32,7 @@ export function Camera_({ navigation }) {
 
   async function takePicture() {
     const photo = await camera.takePictureAsync({ quality: 1, base64: true, exif: false })
-    const fileName = photo.uri.split('/').pop();
+    const fileName = `${Date.now()}.jpg`
 
     const arraybuffer = await fetch(photo.uri).then((res) => res.arrayBuffer())
 
@@ -47,7 +47,7 @@ export function Camera_({ navigation }) {
       });
 
     if (error) {
-      console.error('Deu erro!', error)
+      console.error(`Error: ${error}`)
     } else {
       console.log("Deu certo! ", data)
       navigation.navigate("Home")
@@ -60,7 +60,7 @@ export function Camera_({ navigation }) {
         style={{ flex: 1 }}
         ref={r => { camera = r }}
       >
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' }}>
           <ButtonIcon onPress={() => takePicture()} icon={{ name: 'camera', size: 24, color: 'black' }} />
         </View>
       </Camera>
